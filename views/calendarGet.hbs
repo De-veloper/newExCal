@@ -1,0 +1,25 @@
+<a href="/calendar">Post</a>
+
+{{#if params.year}}
+{{{yearHeader params.year}}}
+{{/if}}
+
+
+
+{{#if params.month}}
+    
+    {{{buildFullMonth params.year params.month data.data}}}
+{{else}}
+    {{{buildFullMonth params.year 1 data.data}}}
+    {{{buildFullMonth params.year 2 data.data}}}
+    {{{buildFullMonth params.year 3 data.data}}}
+    {{{buildFullMonth params.year 4 data.data}}}
+    {{{buildFullMonth params.year 5 data.data}}}
+    {{{buildFullMonth params.year 6 data.data}}}
+    {{{buildFullMonth params.year 7 data.data}}}
+    {{{buildFullMonth params.year 8 data.data}}}
+    {{{buildFullMonth params.year 9 data.data}}}
+    {{{buildFullMonth params.year 10 data.data}}}
+    {{{buildFullMonth params.year 11 data.data}}}
+    {{{buildFullMonth params.year 12 data.data}}}
+{{/if}}

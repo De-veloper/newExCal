@@ -182,10 +182,10 @@ var module = (function(){
       return '<span style="text-align:center;'+(currentMonth?'font-weight:bold;opacity:1':'opacity:0.5')+'">'+day+'</span>';
   }
   var monthHeader = function(month){
-      return '<div style="clear:both;"></div><center><h1>'+month+'</h1></center>';
+    if(typeof month !='undefined' && (month>=1 && month<=12)) return '<div style="clear:both;"></div><center><h1>'+month+'</h1></center>';
   }
   var yearHeader = function(year){
-      return '<div style="clear:both;"></div><center><h1>'+year+'</h1></center>';
+      if(typeof year !='undefined') return '<div style="clear:both;"></div><center><h1>'+year+'</h1></center>';
   }
 
   /*********Build full calendar by month or year**********/

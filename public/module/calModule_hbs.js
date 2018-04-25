@@ -19,37 +19,39 @@ hbs.registerHelper('yearHeader', calendar.module.yearHeader);//year
 //hbs.registerHelper('buildHtml', calendar.module.buildHtml);//year, obj
 //New func
 hbs.registerHelper('buildFullMonth', function(year,month,actObj){
-    
     var note = '';
-    var dayAreaHtml = calendar.module.monthHeader(month);
+    var dayAreaHtml = '';
     var days = calendar.module.daysofMonth(year,month);
 
     var firstDayofMonth = calendar.module.getDayIndex(year, month, 1);
     var lastDayofMonth = calendar.module.getDayIndex(year, month, days);
 
-    dayAreaHtml += calendar.module.listDaysBesidesCurMonth(year, month, 1);
+    if (typeof year != 'undefined' && typeof month!='undefined'){
+        dayAreaHtml += calendar.module.monthHeader(month);
+        dayAreaHtml += calendar.module.listDaysBesidesCurMonth(year, month, 1);
 
-    for (var d=1; d<=days; d++){
-        note = '';
-        
-        if (typeof actObj!='undefined') {
-            var matchAct = actObj.filter(function(el){ //TODO: change to find
-                if (el.year == year && el.month == month && el.day == d){
-                    
-                  return el;
-                }
-            });
+        for (var d=1; d<=days; d++){
+            note = '';
             
-            if(matchAct.length!=0) {
+            if (typeof actObj!='undefined') {
+                var matchAct = actObj.filter(function(el){ //TODO: change to find
+                    if (el.year == year && el.month == month && el.day == d){
+                        
+                      return el;
+                    }
+                });
                 
-              note = matchAct[0].note;
-              
+                if(matchAct.length!=0) {
+                    
+                  note = matchAct[0].note;
+                  
+                }
             }
+            dayAreaHtml += '<div style="float:left;width:13%;border:1px #333 solid;height:100px;" >'+calendar.module.dayComp(d, month) + note+'</div>';
         }
-        dayAreaHtml += '<div style="float:left;width:13%;border:1px #333 solid;height:100px;" >'+calendar.module.dayComp(d, month) + note+'</div>';
+    
+        dayAreaHtml += calendar.module.listDaysBesidesCurMonth(year, month, days);
     }
-
-    dayAreaHtml += calendar.module.listDaysBesidesCurMonth(year, month, days);
 
     return dayAreaHtml;
 });
