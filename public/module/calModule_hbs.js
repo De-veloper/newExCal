@@ -47,7 +47,7 @@ hbs.registerHelper('buildFullMonth', function(year,month,actObj){
                   
                 }
             }
-            dayAreaHtml += '<div style="float:left;width:13%;border:1px #333 solid;height:100px;" >'+calendar.module.dayComp(d, month) + note+'</div>';
+            dayAreaHtml += '<div style="float:left;width:13%;border:1px #333 solid;height:100px;" >'+calendar.module.dayComp(d, month) + '<span class="note">'+note+'</span>'+'</div>';
         }
     
         dayAreaHtml += calendar.module.listDaysBesidesCurMonth(year, month, days);

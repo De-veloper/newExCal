@@ -106,7 +106,7 @@ var module = (function(){
           }
           //
     }
-    var dayAreaHtml = '<div style="float:left;width:13%;border:1px #333 solid;height:100px;" >'+dayComp(day, currentMonth)+note+'</div>';
+    var dayAreaHtml = '<div class="daybox" >'+dayComp(day, currentMonth)+note+'</div>';
     return dayAreaHtml;
   } 
   /*****
@@ -179,7 +179,7 @@ var module = (function(){
 
   //create day component
   var dateNumber = function(day, currentMonth){
-      return '<span style="text-align:center;'+(currentMonth?'font-weight:bold;opacity:1':'opacity:0.5')+'">'+day+'</span>';
+      return '<span style="text-align:center;'+(currentMonth?'font-weight:bold;opacity:1':'opacity:0.5')+'">'+day+'</span><br>';
   }
   var monthHeader = function(month){
     if(typeof month !='undefined' && (month>=1 && month<=12)) return '<div style="clear:both;"></div><center><h1>'+month+'</h1></center>';

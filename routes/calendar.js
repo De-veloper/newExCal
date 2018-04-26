@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var calendar = require('./../public/module/calModule_hbs');
 //Data
-var myJson = require('./../public/json/act.json');
-var myJson2 = require('./../public/json/test.json');
+//var myJson = require('./../public/json/act.json');
+var actJson = './public/json/test.json';//data for exercise
 var fs = require('fs');
 
 
@@ -12,7 +12,7 @@ var fs = require('fs');
  */
 /* GET calendar page. */
 router.get('/', function(req, res, next) {
-   res.render('calendar',myJson);
+   res.render('calendar',{title:'Post'});
 
 });
 
@@ -23,22 +23,26 @@ router.get('/get', function(req, res, next) {
     //res.send(req.params)
 });
 router.get('/get/:year', function(req, res, next) {
-    var finalData = {
-        data:myJson2,
-        params:req.params
-    }
-    res.render('calendarGet',finalData);
-    //res.send(finalData)
+    fs.readFile(actJson, 'utf-8', function(err, data) {
+        var finalData = {
+            data:JSON.parse(data),
+            params:req.params
+        }
+        res.render('calendarGet',finalData);
+    });
 });
 
 router.get('/get/:year/:month', function(req, res, next) {
-    var finalData = {
-        data:myJson2,
-        params:req.params
-    }
-    res.render('calendarGet',finalData);
+    fs.readFile(actJson, 'utf-8', function(err, data) {
+        var finalData = {
+            data:JSON.parse(data),
+            params:req.params
+        }
+        res.render('calendarGet',finalData);
+    });
     //res.send(req.params)
 });
+
 //Post
 router.post('/post', function(req, res) {
     var workpoutData = {
@@ -49,12 +53,14 @@ router.post('/post', function(req, res) {
     }
     
 
-    fs.readFile('./public/json/test.json', 'utf-8', function(err, data) {
+    fs.readFile(actJson, 'utf-8', function(err, data) {
         if (err) throw err
 
         var arrayOfObjects = JSON.parse(data)
+        delete workpoutData._locals; //Not sure why property "_locals" shows
         arrayOfObjects.data.push(workpoutData)
-        fs.writeFile('./public/json/test.json', JSON.stringify(arrayOfObjects), 'utf-8', function(err) {
+        
+        fs.writeFile(actJson, JSON.stringify(arrayOfObjects), 'utf-8', function(err) {
             if (err) throw err
             console.log('Done!')
         })

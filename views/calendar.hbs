@@ -1,8 +1,30 @@
-<h1>Please enter your activity</h1>
-<form name="submitForm" action="/calendar/post" method="post">
-    <label>Year</label>:<input type="text" name="year" ><br>
-    <label>Month</label>:<input type="text" name="month" ><br>
-    <label>Day</label>:<input type="text" name="day" ><br>
-    <label>Note</label>:<input type="text" name="note" ><br>
-    <input type="submit" value="Submit">
-</form>
+<div class="container"></div>
+    <h1>Please enter your activity</h1>
+    <form name="submitForm" action="/calendar/post" method="post">
+        <div class="form-group row">
+            <label for="year-input" class="col-2 col-form-label">Year</label>
+            <div class="col-10">
+                <input class="form-control" type="text" value="" name="year" id="year-input">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="month-input" class="col-2 col-form-label">Month</label>
+            <div class="col-10">
+                <input class="form-control" type="text" value="" name="month" id="month-input">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="day-input" class="col-2 col-form-label">Day</label>
+            <div class="col-10">
+                <input class="form-control" type="text" value="" name="day" id="day-input">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="note-input" class="col-2 col-form-label">Note</label>
+            <div class="col-10">
+                <input class="form-control" type="text" value="" name="note" id="note-input">
+            </div>
+        </div>
+        <input class="form-control" type="submit" value="Submit">
+    </form>
+</div>
