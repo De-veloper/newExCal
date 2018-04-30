@@ -8,7 +8,8 @@ var fs = require('fs');
 
 //TODO
 //1. Save to different files
-//2. able to add differnt event in the same say
+//2. Delete/ Edit
+//3. Edit page
 
 /*
  * Pages
@@ -60,6 +61,7 @@ router.post('/post', function(req, res) {
         if (err) throw err
 
         var arrayOfObjects = JSON.parse(data)
+        console.log(arrayOfObjects);
         delete workpoutData._locals; //Not sure why property "_locals" shows
         arrayOfObjects.data.push(workpoutData)
         

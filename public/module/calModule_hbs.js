@@ -43,7 +43,9 @@ hbs.registerHelper('buildFullMonth', function(year,month,actObj){
                 
                 if(matchAct.length!=0) {
                     
-                  note = matchAct[0].note;
+                  note = matchAct.map(function(e){
+                      return e.note
+                  }).join('<br>');
                   
                 }
             }
