@@ -1,7 +1,7 @@
-<a href="/calendar">Post</a>
+<a href="/calendar"><button class="btn btn-primary">Post</button></a>
 
 {{#if params.year}}
-{{{yearHeader params.year}}}
+<a href="/calendar/get/{{params.year}}">{{{yearHeader params.year}}}</a>
 {{/if}}
 
 

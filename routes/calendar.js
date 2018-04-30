@@ -6,6 +6,9 @@ var calendar = require('./../public/module/calModule_hbs');
 var actJson = './public/json/test.json';//data for exercise
 var fs = require('fs');
 
+//TODO
+//1. Save to different files
+//2. able to add differnt event in the same say
 
 /*
  * Pages
@@ -64,10 +67,13 @@ router.post('/post', function(req, res) {
             if (err) throw err
             console.log('Done!')
         })
+
+        res.redirect('/calendar/get/'+workpoutData.year+'/'+workpoutData.month);
     })
 
-    res.render('calendarPost',workpoutData);
-    //res.send(workpoutData);
+    //res.render('calendarPost',workpoutData);
+
+    
 
 });
 module.exports = router;
