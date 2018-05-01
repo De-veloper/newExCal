@@ -185,7 +185,7 @@ var module = (function(){
     if(typeof month !='undefined' && (month>=1 && month<=12)) return '<div style="clear:both;"></div><center><h1>'+month+'</h1></center>';
   }
   var yearHeader = function(year){
-      if(typeof year !='undefined') return '<div style="clear:both;"></div><center><h1>'+year+'</h1></center>';
+      if(typeof year !='undefined') return ''+year+'';
   }
 
   /*********Build full calendar by month or year**********/

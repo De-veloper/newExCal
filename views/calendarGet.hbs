@@ -1,37 +1,15 @@
 <a href="/calendar"><button class="btn btn-primary">Post</button></a>
+<div class="form-basic">
+    <div class="form-title-row">
+        {{#if params.year}}
+        <h1><a href="/calendar/get/{{params.year}}">{{{yearHeader params.year}}}</a></h1>
+        {{/if}}
 
-{{#if params.year}}
-<a href="/calendar/get/{{params.year}}">{{{yearHeader params.year}}}</a>
-{{/if}}
+    </div>
 
 
 {{#if params.day}}
     {{{buildDay params.year params.month params.day data.data}}}
-    <!--<form name="submitForm" action="/calendar/delete" method="post">
-        <div class="form-group row">
-            <div class="col-10">
-                <input class="form-control" type="text" value="{{params.year}}" name="year" id="year-input">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-10">
-                <input class="form-control" type="text" value="{{params.month}}"  name="month" id="month-input">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-10">
-                <input class="form-control" type="text" value="{{params.day}}" name="day" id="day-input">
-                
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="note-input" class="col-2 col-form-label">Note</label>
-            <div class="col-10">
-                <input class="form-control" type="text" value="" name="note" id="note-input">
-            </div>
-        </div>
-        <input class="form-control btn btn-primary" type="submit" value="Submit">
-    </form>-->
 {{else}}
     {{#if params.month}}
         {{{buildFullMonth params.year params.month data.data}}}
@@ -50,3 +28,4 @@
         {{{buildFullMonth params.year 12 data.data}}}
     {{/if}}
 {{/if}}
+</div>
