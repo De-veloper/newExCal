@@ -5,21 +5,48 @@
 {{/if}}
 
 
-
-{{#if params.month}}
-    
-    {{{buildFullMonth params.year params.month data.data}}}
+{{#if params.day}}
+    {{{buildDay params.year params.month params.day data.data}}}
+    <form name="submitForm" action="/calendar/delete" method="post">
+        <div class="form-group row">
+            <div class="col-10">
+                <input class="form-control" type="text" value="{{params.year}}" name="year" id="year-input">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-10">
+                <input class="form-control" type="text" value="{{params.month}}"  name="month" id="month-input">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-10">
+                <input class="form-control" type="text" value="{{params.day}}" name="day" id="day-input">
+                
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="note-input" class="col-2 col-form-label">Note</label>
+            <div class="col-10">
+                <input class="form-control" type="text" value="" name="note" id="note-input">
+            </div>
+        </div>
+        <input class="form-control btn btn-primary" type="submit" value="Submit">
+    </form>
 {{else}}
-    {{{buildFullMonth params.year 1 data.data}}}
-    {{{buildFullMonth params.year 2 data.data}}}
-    {{{buildFullMonth params.year 3 data.data}}}
-    {{{buildFullMonth params.year 4 data.data}}}
-    {{{buildFullMonth params.year 5 data.data}}}
-    {{{buildFullMonth params.year 6 data.data}}}
-    {{{buildFullMonth params.year 7 data.data}}}
-    {{{buildFullMonth params.year 8 data.data}}}
-    {{{buildFullMonth params.year 9 data.data}}}
-    {{{buildFullMonth params.year 10 data.data}}}
-    {{{buildFullMonth params.year 11 data.data}}}
-    {{{buildFullMonth params.year 12 data.data}}}
+    {{#if params.month}}
+        {{{buildFullMonth params.year params.month data.data}}}
+    {{else}}
+        {{{buildFullMonth params.year 1 data.data}}}
+        {{{buildFullMonth params.year 2 data.data}}}
+        {{{buildFullMonth params.year 3 data.data}}}
+        {{{buildFullMonth params.year 4 data.data}}}
+        {{{buildFullMonth params.year 5 data.data}}}
+        {{{buildFullMonth params.year 6 data.data}}}
+        {{{buildFullMonth params.year 7 data.data}}}
+        {{{buildFullMonth params.year 8 data.data}}}
+        {{{buildFullMonth params.year 9 data.data}}}
+        {{{buildFullMonth params.year 10 data.data}}}
+        {{{buildFullMonth params.year 11 data.data}}}
+        {{{buildFullMonth params.year 12 data.data}}}
+    {{/if}}
 {{/if}}

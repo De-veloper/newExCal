@@ -18,6 +18,31 @@ hbs.registerHelper('monthHeader', calendar.module.monthHeader);//month
 hbs.registerHelper('yearHeader', calendar.module.yearHeader);//year
 //hbs.registerHelper('buildHtml', calendar.module.buildHtml);//year, obj
 //New func
+//Build day
+hbs.registerHelper('buildDay', function(year,month,day,actObj){
+    var note = '';
+    //var days = calendar.module.daysofMonth(year,month);
+    if (typeof year != 'undefined' && typeof month!='undefined' && typeof day!='undefined'){
+        //for (var d=1; d<=days; d++){
+            note = '';
+            if (typeof actObj!='undefined') {
+                var matchAct = actObj.filter(function(el){ 
+                    if (el.year == year && el.month == month && el.day == day){
+                      return el;
+                    }
+                });
+                if(matchAct.length!=0) {
+                  note = matchAct.map(function(e){
+                      return e.year+'/'+e.month+'/'+e.day+'/ '+e.note +'<button class="btn btn-danger">Delete</button>'
+                  }).join('<br>')
+                }
+            }
+       // }
+    
+    }
+    return note;
+});
+//Build full month
 hbs.registerHelper('buildFullMonth', function(year,month,actObj){
     var note = '';
     var dayAreaHtml = '';
@@ -34,7 +59,7 @@ hbs.registerHelper('buildFullMonth', function(year,month,actObj){
             note = '';
             
             if (typeof actObj!='undefined') {
-                var matchAct = actObj.filter(function(el){ //TODO: change to find
+                var matchAct = actObj.filter(function(el){ 
                     if (el.year == year && el.month == month && el.day == d){
                         
                       return el;
@@ -49,7 +74,7 @@ hbs.registerHelper('buildFullMonth', function(year,month,actObj){
                   
                 }
             }
-            dayAreaHtml += '<div style="float:left;width:13%;border:1px #333 solid;height:100px;" >'+calendar.module.dayComp(d, month) + '<span class="note">'+note+'</span>'+'</div>';
+            dayAreaHtml += '<div style="float:left;width:13%;border:1px #333 solid;height:100px;" ><a href="/calendar/get/'+year+'/'+month+'/'+d+'">'+calendar.module.dayComp(d, month) + '</a><span class="note">'+note+'</span>'+'</div>';
         }
     
         dayAreaHtml += calendar.module.listDaysBesidesCurMonth(year, month, days);

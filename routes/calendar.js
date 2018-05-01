@@ -15,11 +15,10 @@ var fs = require('fs');
  * Pages
  */
 /* GET calendar page. */
+// Main page
 router.get('/', function(req, res, next) {
    res.render('calendar',{title:'Post'});
-
 });
-
 
 //Get
 router.get('/get', function(req, res, next) {
@@ -47,6 +46,17 @@ router.get('/get/:year/:month', function(req, res, next) {
     //res.send(req.params)
 });
 
+router.get('/get/:year/:month/:day', function(req, res, next) {
+    fs.readFile(actJson, 'utf-8', function(err, data) {
+        var finalData = {
+            data:JSON.parse(data),
+            params:req.params
+        }
+        res.render('calendarGet',finalData);
+    });
+    //res.send(req.params)
+});
+
 //Post
 router.post('/post', function(req, res) {
     var workpoutData = {
@@ -61,7 +71,7 @@ router.post('/post', function(req, res) {
         if (err) throw err
 
         var arrayOfObjects = JSON.parse(data)
-        console.log(arrayOfObjects);
+        
         delete workpoutData._locals; //Not sure why property "_locals" shows
         arrayOfObjects.data.push(workpoutData)
         
@@ -75,9 +85,43 @@ router.post('/post', function(req, res) {
 
     //res.render('calendarPost',workpoutData);
 
-    
-
 });
+
+//Delete
+router.post('/delete', function(req, res, next) {
+    var workpoutData = {
+        "year":req.body.year,
+        "month":req.body.month,
+        "day":req.body.day,
+        "note":req.body.note
+    }
+    fs.readFile(actJson, 'utf-8', function(err, data) {
+        if (err) throw err
+
+        var arrayOfObjects = JSON.parse(data)
+        
+        delete workpoutData._locals; //Not sure why property "_locals" shows
+
+        arrayOfObjects.data.find(function(e,i,a){
+            if(e.year == workpoutData.year && e.month == workpoutData.month && e.day == workpoutData.day && e.note == workpoutData.note ){
+                return a.splice(i,1)
+            }
+        })
+       // arrayOfObjects.data = [];
+
+        //arrayOfObjects.data.push(updatedData)
+        
+        fs.writeFile(actJson, JSON.stringify(arrayOfObjects), 'utf-8', function(err) {
+            if (err) throw err
+            console.log('Done!')
+        })
+
+        res.redirect('/calendar/get/'+workpoutData.year+'/'+workpoutData.month);
+       // res.render('calendarPost',arrayOfObjects);
+    })
+    
+ });
+
 module.exports = router;
 
 
