@@ -33,7 +33,7 @@ hbs.registerHelper('buildDay', function(year,month,day,actObj){
                 });
                 if(matchAct.length!=0) {
                   note = matchAct.map(function(e){
-                      return e.year+'/'+e.month+'/'+e.day+'/ '+e.note +'<button class="btn btn-danger">Delete</button>'
+                      return e.year+'/'+e.month+'/'+e.day+'/ '+e.note +'<a href="/calendar/delete/'+e.year+'/'+e.month+'/'+e.day+'/'+e.id+'"><button class="btn btn-danger">Delete</button></a>'
                   }).join('<br>')
                 }
             }
@@ -84,6 +84,11 @@ hbs.registerHelper('buildFullMonth', function(year,month,actObj){
 });
 
 //Genernal tool
+//Generate ID
+hbs.registerHelper('generateID', function(n, block) {
+    return Math.floor(Math.random()*10000000000);
+}); 
+//
 hbs.registerHelper('times', function(n, block) {
     var accum = '';
     for(var i = 1; i <= n; ++i)

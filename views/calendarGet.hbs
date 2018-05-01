@@ -7,7 +7,7 @@
 
 {{#if params.day}}
     {{{buildDay params.year params.month params.day data.data}}}
-    <form name="submitForm" action="/calendar/delete" method="post">
+    <!--<form name="submitForm" action="/calendar/delete" method="post">
         <div class="form-group row">
             <div class="col-10">
                 <input class="form-control" type="text" value="{{params.year}}" name="year" id="year-input">
@@ -31,7 +31,7 @@
             </div>
         </div>
         <input class="form-control btn btn-primary" type="submit" value="Submit">
-    </form>
+    </form>-->
 {{else}}
     {{#if params.month}}
         {{{buildFullMonth params.year params.month data.data}}}

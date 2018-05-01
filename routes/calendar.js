@@ -60,6 +60,7 @@ router.get('/get/:year/:month/:day', function(req, res, next) {
 //Post
 router.post('/post', function(req, res) {
     var workpoutData = {
+        "id":req.body.id,
         "year":req.body.year,
         "month":req.body.month,
         "day":req.body.day,
@@ -88,36 +89,23 @@ router.post('/post', function(req, res) {
 });
 
 //Delete
-router.post('/delete', function(req, res, next) {
-    var workpoutData = {
-        "year":req.body.year,
-        "month":req.body.month,
-        "day":req.body.day,
-        "note":req.body.note
-    }
+//router.delete TODO
+router.get('/delete/:year/:month/:day/:id', function(req, res) {
+    //res.send(req.params)
     fs.readFile(actJson, 'utf-8', function(err, data) {
         if (err) throw err
-
         var arrayOfObjects = JSON.parse(data)
-        
-        delete workpoutData._locals; //Not sure why property "_locals" shows
-
         arrayOfObjects.data.find(function(e,i,a){
-            if(e.year == workpoutData.year && e.month == workpoutData.month && e.day == workpoutData.day && e.note == workpoutData.note ){
+            if(e.id == req.params.id ){
                 return a.splice(i,1)
             }
         })
-       // arrayOfObjects.data = [];
-
-        //arrayOfObjects.data.push(updatedData)
-        
         fs.writeFile(actJson, JSON.stringify(arrayOfObjects), 'utf-8', function(err) {
             if (err) throw err
             console.log('Done!')
         })
 
-        res.redirect('/calendar/get/'+workpoutData.year+'/'+workpoutData.month);
-       // res.render('calendarPost',arrayOfObjects);
+        res.redirect('/calendar/get/'+req.params.year+'/'+req.params.month+'/'+req.params.day);
     })
     
  });
