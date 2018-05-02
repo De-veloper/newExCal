@@ -34,7 +34,7 @@ app.use('/users', usersRouter);
 //Calendar 2/2
 app.use('/calendar', calendarRouter);
 //api
-app.use('/api', api);
+app.use('/calendar/api', api);
 //test api
 //app.use('/testapi', testApi);
 

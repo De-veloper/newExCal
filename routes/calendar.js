@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var calendar = require('./../public/module/calModule_hbs');
-
+//Request api
 var request = require('request');
-
-//Data
-//var myJson = require('./../public/json/act.json');
-var actJson = './public/json/test.json';//data for exercise
+//file module
 var fs = require('fs');
+//Data file 
+var actJson = './public/json/test.json';//data for exercise
+//siteUrl
+var siteUrl = 'http://localhost:3000';
 
 
 //TODO
@@ -120,7 +121,7 @@ router.get('/delete/:year/:month/:day/:id', function(req, res) {
     })
     */
     //Use api call from test api
-    var cUrl = "http://localhost:3000/api/" + req.params.year+"/"+ req.params.month+"/"+ req.params.day+"/"+ req.params.id;
+    var cUrl = siteUrl+"/calendar/api/" + req.params.year+"/"+ req.params.month+"/"+ req.params.day+"/"+ req.params.id;
     request.delete(
         { 
             url: cUrl,

@@ -73,7 +73,6 @@ router.route('/:year/:month/:day')
 router.route('/:year/:month/:day/:id')
   .delete(function(req, res, next) {
     //next(new Error('not implemented'));
-
     fs.readFile(actJson, 'utf-8', function(err, data) {
         if (err) throw err
         var arrayOfObjects = JSON.parse(data)
@@ -86,11 +85,9 @@ router.route('/:year/:month/:day/:id')
             if (err) throw err
             console.log('Done!')
         })
-
         res.json(arrayOfObjects.data);
     })
 });
-
 
 module.exports = router;
 
