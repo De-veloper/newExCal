@@ -12,8 +12,10 @@ var usersRouter = require('./routes/users');
 
 //Calendar 1/2
 var calendarRouter = require('./routes/calendar');
+//api
+var api = require('./routes/api');
 //test api
-var testApi = require('./routes/testapi');
+//var testApi = require('./routes/testapi');
 
 var app = express();
 
@@ -31,8 +33,10 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 //Calendar 2/2
 app.use('/calendar', calendarRouter);
+//api
+app.use('/api', api);
 //test api
-app.use('/api', testApi);
+//app.use('/testapi', testApi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
