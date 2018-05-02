@@ -6,10 +6,16 @@ var calendar = require('./../public/module/calModule_hbs');
 var actJson = './public/json/test.json';//data for exercise
 var fs = require('fs');
 
+
 //TODO
 //1. Save to different files
 //2. Delete/ Edit
 //3. Edit page
+/*
+ * All API test
+ * 
+*/
+
 
 /*
  * Pages
@@ -90,23 +96,26 @@ router.post('/post', function(req, res) {
 
 //Delete
 //router.delete TODO
+
 router.get('/delete/:year/:month/:day/:id', function(req, res) {
     //res.send(req.params)
-    fs.readFile(actJson, 'utf-8', function(err, data) {
-        if (err) throw err
-        var arrayOfObjects = JSON.parse(data)
-        arrayOfObjects.data.find(function(e,i,a){
-            if(e.id == req.params.id ){
-                return a.splice(i,1)
-            }
-        })
-        fs.writeFile(actJson, JSON.stringify(arrayOfObjects), 'utf-8', function(err) {
+    //app.delete('/delete/:year/:month/:day/:id', function(req, res) {
+        fs.readFile(actJson, 'utf-8', function(err, data) {
             if (err) throw err
-            console.log('Done!')
+            var arrayOfObjects = JSON.parse(data)
+            arrayOfObjects.data.find(function(e,i,a){
+                if(e.id == req.params.id ){
+                    return a.splice(i,1)
+                }
+            })
+            fs.writeFile(actJson, JSON.stringify(arrayOfObjects), 'utf-8', function(err) {
+                if (err) throw err
+                console.log('Done!')
+            })
+    
+            res.redirect('/calendar/get/'+req.params.year+'/'+req.params.month+'/'+req.params.day);
         })
-
-        res.redirect('/calendar/get/'+req.params.year+'/'+req.params.month+'/'+req.params.day);
-    })
+    //});
     
  });
 

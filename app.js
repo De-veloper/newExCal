@@ -12,7 +12,8 @@ var usersRouter = require('./routes/users');
 
 //Calendar 1/2
 var calendarRouter = require('./routes/calendar');
-
+//test api
+var testApi = require('./routes/testapi');
 
 var app = express();
 
@@ -30,6 +31,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 //Calendar 2/2
 app.use('/calendar', calendarRouter);
+//test api
+app.use('/api', testApi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -46,5 +49,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;
